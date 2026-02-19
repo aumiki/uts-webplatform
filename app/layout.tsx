@@ -1,6 +1,7 @@
 import "./globals.css";
 import { CartProvider } from "../context/CartContext";
 import CartIndicator from "../components/CartIndicator";
+import { FavoriteProvider } from "../context/FavoriteContext";
 
 export default function RootLayout({
   children,
@@ -10,10 +11,12 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-      <CartProvider>
-        <CartIndicator />
-        {children}
-      </CartProvider>
+        <CartProvider>
+          <FavoriteProvider>
+            <CartIndicator />
+              {children}
+          </FavoriteProvider>
+        </CartProvider>
       </body>
     </html>
   );

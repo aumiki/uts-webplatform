@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { fetchProductById } from "../../../lib/api";
 import AddToCartButton from "../../../components/AddToCartButton";
+import FavoriteButton from "../../../components/FavoriteButton";
 
 export default async function ProductDetail({
   params,
@@ -18,7 +19,7 @@ export default async function ProductDetail({
       <p>{product.description}</p>
       <p>Price: ${product.price}</p>
       <AddToCartButton product={product} />
-
+        <FavoriteButton product={product} />
         <Image
             src={product.thumbnail}
             alt={product.title}
