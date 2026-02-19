@@ -1,8 +1,8 @@
 import "./globals.css";
-import Link from "next/link";
 import { CartProvider } from "../context/CartContext";
 import CartIndicator from "../components/CartIndicator";
 import { FavoriteProvider } from "../context/FavoriteContext";
+import Navbar from "../components/Navbar";
 
 export default function RootLayout({
   children,
@@ -10,36 +10,17 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
-      <body>
+    <html lang="en" className="h-full">
+      <body className="flex flex-col min-h-screen">
         <CartProvider>
           <FavoriteProvider>
+            <Navbar />
+
+            <main className="flex-grow container mx-auto p-4 sm:p-6 lg:p-8">
+              {children}
+            </main>
 
             <CartIndicator />
-
-            {/* NAVBAR */}
-            <div
-              style={{
-                padding: "12px",
-                backgroundColor: "#111",
-                display: "flex",
-                gap: "20px",
-              }}
-            >
-              <Link href="/" style={{ color: "white" }}>
-                Home
-              </Link>
-
-              <Link href="/cart" style={{ color: "white" }}>
-                Cart
-              </Link>
-
-              <Link href="/favorites" style={{ color: "white" }}>
-                Favorites
-              </Link>
-            </div>
-
-            {children}
 
           </FavoriteProvider>
         </CartProvider>

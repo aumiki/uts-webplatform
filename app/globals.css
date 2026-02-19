@@ -1,8 +1,14 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #fcfafa; /* Very light, clean background */
+  --foreground: #1a1a1a; /* Deep charcoal for primary text */
+
+  --primary-color: #8B454F; /* Rich, deep rose */
+  --accent-color: #D4AF37; /* Luxurious gold */
+  --secondary-color: #d4d4d8; /* Elegant light gray for borders/secondary elements */
+  --text-primary: var(--foreground);
+  --text-secondary: #555555; /* Slightly lighter gray for secondary text */
 }
 
 @theme inline {
@@ -14,13 +20,32 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --background: #121212; /* Darker background for luxury */
+    --foreground: #e0e0e0; /* Lighter text */
+    --primary-color: #9c545f; /* Slightly lighter deep rose for dark mode */
+    --accent-color: #e0be6f; /* Brighter gold for dark mode */
+    --secondary-color: #4a4a4a; /* Darker gray for borders */
+    --text-primary: var(--foreground);
+    --text-secondary: #b0b0b0;
   }
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  /* More refined sans-serif for body text, better readability for products */
+  font-family: 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  line-height: 1.6;
 }
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Playfair Display', Georgia, serif; /* Elegant serif for headings */
+}
+
+/* Basic Tailwind color overrides to use new theme colors */
+.text-primary { color: var(--primary-color); }
+.bg-primary { background-color: var(--primary-color); }
+.text-accent { color: var(--accent-color); }
+.bg-accent { background-color: var(--accent-color); }
+.text-secondary-color { color: var(--secondary-color); }
+.bg-secondary-color { background-color: var(--secondary-color); }
