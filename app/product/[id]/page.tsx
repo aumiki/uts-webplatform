@@ -1,17 +1,13 @@
-interface Props {
-  params: { id: string };
-}
+import { fetchProductById } from "../../../lib/api";
 
-async function getProduct(id: string) {
-  const res = await fetch(`https://dummyjson.com/products/${id}`, {
-    cache: "no-store", // ini bikin jadi SSR
-  });
+export default async function ProductDetail({
+  params,
+}: {
+  params: Promise<{ id: string }>;
+}) {
+  const { id } = await params;
 
-  return res.json();
-}
-
-export default async function ProductDetail({ params }: Props) {
-  const product = await getProduct(params.id);
+  const product = await fetchProductById(id);
 
   return (
     <div style={{ padding: "20px" }}>

@@ -1,15 +1,8 @@
 import Link from "next/link";
-
-async function getProducts() {
-  const res = await fetch("https://dummyjson.com/products", {
-    cache: "force-cache", // ini bikin jadi SSG
-  });
-
-  return res.json();
-}
+import { fetchProducts } from "@/lib/api";
 
 export default async function Home() {
-  const data = await getProducts();
+  const data = await fetchProducts();
 
   return (
     <div style={{ padding: "20px" }}>
