@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useCart } from "../context/CartContext";
 
 export default function CartIndicator() {
@@ -9,12 +10,13 @@ export default function CartIndicator() {
     <div
       style={{
         padding: "12px",
-        backgroundColor: "#eee",
-        color: "#111",
-        fontWeight: "bold",
+        backgroundColor: "#111",
+        color: "#fff",
       }}
     >
-      🛒 Cart Items: {cart.length}
+      <Link href="/cart" style={{ color: "white", textDecoration: "none" }}>
+        🛒 Cart Items: {cart.length}
+      </Link>
     </div>
   );
 }
