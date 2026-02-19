@@ -3,7 +3,7 @@
 import { useCart } from "../../context/CartContext";
 
 export default function CartPage() {
-  const { cart, removeFromCart } = useCart();
+const { cart, removeFromCart, increaseQty, decreaseQty } = useCart();
 
   const total = cart.reduce((sum, item) => sum + item.price, 0);
 
@@ -14,14 +14,20 @@ export default function CartPage() {
       {cart.length === 0 && <p>Cart is empty.</p>}
 
       {cart.map((item) => (
-        <div key={item.id} style={{ marginBottom: "15px" }}>
-          <h3>{item.title}</h3>
-          <p>${item.price}</p>
-          <button onClick={() => removeFromCart(item.id)}>
+        <div key={item.id}>
+            <h3>{item.title}</h3>
+            <p>${item.price}</p>
+            <p>Quantity: {item.quantity}</p>
+
+            <button onClick={() => decreaseQty(item.id)}>-</button>
+            <button onClick={() => increaseQty(item.id)}>+</button>
+
+            <button onClick={() => removeFromCart(item.id)}>
             Remove
-          </button>
+            </button>
         </div>
-      ))}
+        ))}
+
 
       {cart.length > 0 && (
         <h2 style={{ marginTop: "20px" }}>
