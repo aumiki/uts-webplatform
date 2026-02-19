@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { fetchProductById } from "../../../lib/api";
 
 export default async function ProductDetail({
@@ -15,7 +16,13 @@ export default async function ProductDetail({
       <h2>{product.title}</h2>
       <p>{product.description}</p>
       <p>Price: ${product.price}</p>
-      <img src={product.thumbnail} width="200" />
+      import Image from "next/image";
+        <Image
+            src={product.thumbnail}
+            alt={product.title}
+            width={300}
+            height={300}
+/>
     </div>
   );
 }
