@@ -31,6 +31,7 @@ const CartContext = createContext<CartContextType | undefined>(undefined);
 
 export function CartProvider({ children }: { children: ReactNode }) {
   const [cart, setCart] = useState<CartItem[]>([]);
+  const [isHydrated, setIsHydrated] = useState(false);
 
   // LOAD
   useEffect(() => {
@@ -38,12 +39,15 @@ export function CartProvider({ children }: { children: ReactNode }) {
     if (savedCart) {
       setCart(JSON.parse(savedCart));
     }
+    setIsHydrated(true);
   }, []);
 
   // SAVE
   useEffect(() => {
-    localStorage.setItem("cart", JSON.stringify(cart));
-  }, [cart]);
+    if (isHydrated) {
+      localStorage.setItem("cart", JSON.stringify(cart));
+    }
+  }, [cart, isHydrated]);
 
   const addToCart = (product: Product) => {
     setCart((prev) => {

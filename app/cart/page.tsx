@@ -12,85 +12,105 @@ export default function CartPage() {
   const total = subtotal + shipping;
 
   return (
-    <div className="container mx-auto px-4 py-8">
-      <h1 className="text-4xl font-semibold mb-8 text-center text-foreground font-serif">Your Shopping Cart</h1>
+    <div className="container mx-auto px-6 py-24 min-h-screen">
+      <div className="flex flex-col items-center mb-16">
+        <span className="text-soft-pink uppercase tracking-[0.2em] text-xs font-semibold mb-2">Checkout</span>
+        <h1 className="text-4xl font-serif text-foreground text-center">Your Shopping Bag</h1>
+        <div className="w-12 h-[1px] bg-soft-pink mt-6"></div>
+      </div>
 
       {cart.length === 0 ? (
-        <div className="text-center py-16">
-          <p className="text-xl text-text-secondary mb-4">Your cart is currently empty. Time to find some glam!</p>
-          <Link href="/" className="inline-block bg-primary hover:bg-opacity-90 text-white font-semibold py-3 px-8 rounded-full transition duration-300 ease-in-out">
-            Continue Shopping
+        <div className="text-center py-24 bg-white/50 border border-soft-pink/10 rounded-sm">
+          <p className="text-text-secondary font-light mb-8">Your shopping bag is currently empty.</p>
+          <Link 
+            href="/" 
+            className="text-xs uppercase tracking-widest border border-foreground px-8 py-3 hover:bg-foreground hover:text-white transition-all"
+          >
+            Start Shopping
           </Link>
         </div>
       ) : (
-        <div className="flex flex-col lg:flex-row gap-8">
+        <div className="flex flex-col lg:flex-row gap-16">
           {/* Cart Items List */}
-          <div className="lg:w-2/3 bg-white rounded-lg shadow-xl p-6">
-            <h2 className="text-2xl font-bold mb-6 text-foreground font-serif">Items</h2>
+          <div className="lg:w-2/3 space-y-8">
             {cart.map((item) => (
-              <div key={item.id} className="flex items-center border-b border-secondary-color py-4 last:border-b-0">
-                <div className="w-24 h-24 mr-4 flex-shrink-0">
+              <div key={item.id} className="flex gap-8 group pb-8 border-b border-soft-pink/10">
+                <div className="w-32 h-40 flex-shrink-0 bg-white border border-soft-pink/5 overflow-hidden">
                   <Image
-                    src={item.thumbnail || "https://via.placeholder.com/100x100?text=Cosmetic"} // Placeholder image
+                    src={item.thumbnail || "https://via.placeholder.com/200x300?text=Cosmetic"}
                     alt={item.title}
-                    width={96}
-                    height={96}
-                    objectFit="cover"
-                    className="rounded-md"
+                    width={128}
+                    height={160}
+                    className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500"
                   />
                 </div>
-                <div className="flex-grow">
-                  <h3 className="text-lg font-semibold text-foreground">{item.title}</h3>
-                  <p className="text-text-secondary text-sm">${item.price.toFixed(2)} each</p>
-                  <div className="flex items-center mt-2">
+                <div className="flex-grow flex flex-col">
+                  <div className="flex justify-between items-start mb-2">
+                    <div>
+                      <h3 className="text-xl font-serif text-foreground mb-1">
+                        <Link href={`/product/${item.id}`}>{item.title}</Link>
+                      </h3>
+                      <p className="text-xs text-text-secondary uppercase tracking-widest">
+                        Unit Price: ${item.price.toFixed(2)}
+                      </p>
+                    </div>
                     <button
-                      onClick={() => decreaseQty(item.id)}
-                      className="bg-secondary-color text-foreground hover:bg-primary hover:text-white transition duration-300 w-8 h-8 rounded-full flex items-center justify-center text-lg font-bold"
+                      onClick={() => removeFromCart(item.id)}
+                      className="text-foreground/30 hover:text-red-400 transition-colors"
                     >
-                      -
-                    </button>
-                    <span className="mx-3 text-lg font-medium text-foreground">{item.quantity}</span>
-                    <button
-                      onClick={() => increaseQty(item.id)}
-                      className="bg-secondary-color text-foreground hover:bg-primary hover:text-white transition duration-300 w-8 h-8 rounded-full flex items-center justify-center text-lg font-bold"
-                    >
-                      +
+                      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-5 h-5">
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+                      </svg>
                     </button>
                   </div>
-                </div>
-                <div className="text-right">
-                  <p className="text-xl font-bold text-accent">${(item.price * item.quantity).toFixed(2)}</p>
-                  <button
-                    onClick={() => removeFromCart(item.id)}
-                    className="text-primary hover:text-red-700 text-sm mt-1"
-                  >
-                    Remove
-                  </button>
+                  
+                  <div className="mt-auto flex items-center justify-between">
+                    <div className="flex items-center border border-soft-pink/20 px-2 py-1">
+                      <button
+                        onClick={() => decreaseQty(item.id)}
+                        className="w-8 h-8 flex items-center justify-center text-foreground/50 hover:text-soft-pink transition-colors"
+                      >
+                        -
+                      </button>
+                      <span className="w-10 text-center text-sm font-medium">{item.quantity}</span>
+                      <button
+                        onClick={() => increaseQty(item.id)}
+                        className="w-8 h-8 flex items-center justify-center text-foreground/50 hover:text-soft-pink transition-colors"
+                      >
+                        +
+                      </button>
+                    </div>
+                    <p className="text-xl font-light text-foreground tracking-tighter">
+                      ${(item.price * item.quantity).toFixed(2)}
+                    </p>
+                  </div>
                 </div>
               </div>
             ))}
           </div>
 
           {/* Order Summary */}
-          <div className="lg:w-1/3 bg-white rounded-lg shadow-xl p-6 h-fit">
-            <h2 className="text-2xl font-bold mb-6 text-foreground font-serif">Order Summary</h2>
-            <div className="space-y-4 text-foreground">
-              <div className="flex justify-between">
-                <span>Subtotal:</span>
-                <span className="font-semibold">${subtotal.toFixed(2)}</span>
+          <div className="lg:w-1/3">
+            <div className="bg-white border border-soft-pink/10 p-10 sticky top-32">
+              <h2 className="text-2xl font-serif mb-8 text-foreground">Summary</h2>
+              <div className="space-y-4 text-sm uppercase tracking-widest">
+                <div className="flex justify-between text-text-secondary">
+                  <span>Subtotal</span>
+                  <span>${subtotal.toFixed(2)}</span>
+                </div>
+                <div className="flex justify-between text-text-secondary">
+                  <span>Shipping</span>
+                  <span className="italic">Complimentary</span>
+                </div>
+                <div className="pt-8 mt-8 border-t border-soft-pink/10 flex justify-between items-end">
+                  <span className="font-bold text-foreground">Total</span>
+                  <span className="text-3xl font-light text-foreground tracking-tighter">${total.toFixed(2)}</span>
+                </div>
               </div>
-              <div className="flex justify-between">
-                <span>Shipping:</span>
-                <span className="font-semibold">${shipping.toFixed(2)}</span>
-              </div>
-              <div className="flex justify-between text-xl font-bold border-t border-secondary-color pt-4 mt-4">
-                <span>Total:</span>
-                <span className="text-accent">${total.toFixed(2)}</span>
-              </div>
+              <button className="w-full bg-foreground text-cream uppercase tracking-[0.2em] text-xs font-semibold py-5 mt-10 hover:bg-soft-pink hover:text-white transition-all duration-300">
+                Proceed to Checkout
+              </button>
             </div>
-            <button className="w-full bg-accent hover:bg-opacity-90 text-white font-semibold text-lg py-3 rounded-md mt-8 transition duration-300 ease-in-out uppercase tracking-wider">
-              Proceed to Checkout
-            </button>
           </div>
         </div>
       )}

@@ -8,17 +8,9 @@ export default function AddToCartButton({ product }: any) {
   return (
     <button
       onClick={() => addToCart(product)}
-      style={{
-        marginTop: "15px",
-        padding: "10px 16px",
-        backgroundColor: "#000",
-        color: "#fff",
-        border: "none",
-        borderRadius: "6px",
-        cursor: "pointer",
-      }}
+      className="w-full bg-foreground text-cream uppercase tracking-[0.2em] text-sm font-semibold py-5 px-8 hover:bg-soft-pink hover:text-white transition-all duration-300 shadow-lg shadow-soft-pink/5"
     >
-      Add to Cart
+      Add to Shopping Bag
     </button>
   );
 }
