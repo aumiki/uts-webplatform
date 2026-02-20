@@ -14,11 +14,15 @@ export default async function CategoryPage({
     (product) => product.category.toLowerCase() === slug.toLowerCase()
   );
 
+  // Determine if this is the makeup category for Editorial Luxury layout
+  const isMakeupCategory = slug.toLowerCase() === 'makeup';
+
   return (
-    <main className="bg-white min-h-screen">
+    <main className={isMakeupCategory ? "bg-[#FAF9F6] min-h-screen" : "bg-white min-h-screen"}>
       <CategoryClient 
         products={filteredProducts} 
-        categoryName={slug} 
+        categoryName={slug}
+        layoutType={isMakeupCategory ? 'editorial-luxury' : 'default'}
       />
       <LuxuryFooter />
     </main>

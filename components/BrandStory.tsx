@@ -44,11 +44,11 @@ export default function BrandStory() {
               viewport={{ once: true }}
               transition={{ duration: 1 }}
             >
-              <span className="text-gold uppercase tracking-[0.5em] text-[10px] font-semibold mb-8 block">Our Heritage</span>
-              <h2 className="text-5xl md:text-7xl font-serif mb-10 leading-[1.1] tracking-tight">
+              <span className="text-black uppercase tracking-[0.5em] text-[10px] font-semibold mb-8 block">Our Heritage</span>
+              <h2 className="text-black md:text-7xl font-serif mb-10 leading-[1.1] tracking-tight">
                 A Legacy of <br /> <span className="italic font-light">Timeless Elegance.</span>
               </h2>
-              <div className="space-y-8 text-white/60 font-light leading-relaxed text-lg max-w-xl">
+              <div className="space-y-8 text-black/60 font-light leading-relaxed text-lg max-w-xl">
                 <p>
                   Since 1924, Maison Luxe has stood at the pinnacle of cosmetic excellence. 
                   Founded in the heart of Paris, our house has consistently pushed the boundaries 
@@ -63,12 +63,12 @@ export default function BrandStory() {
               
               <div className="mt-16 pt-16 border-t border-white/10 flex gap-12">
                 <div>
-                  <span className="block text-3xl font-serif text-white mb-2">100+</span>
-                  <span className="text-[10px] uppercase tracking-widest text-white/40">Years of Savoir-Faire</span>
+                  <span className="block text-3xl font-serif text-black mb-2">100+</span>
+                  <span className="text-[10px] uppercase tracking-widest text-black/40">Years of Savoir-Faire</span>
                 </div>
                 <div>
-                  <span className="block text-3xl font-serif text-white mb-2">Paris</span>
-                  <span className="text-[10px] uppercase tracking-widest text-white/40">Original Atelier</span>
+                  <span className="block text-3xl font-serif text-black mb-2">Paris</span>
+                  <span className="text-[10px] uppercase tracking-widest text-black/40">Original Atelier</span>
                 </div>
               </div>
             </motion.div>

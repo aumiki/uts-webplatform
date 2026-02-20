@@ -6,13 +6,16 @@ import { Product } from "@/constants/products";
 
 export default function CategoryClient({ 
   products, 
-  categoryName 
+  categoryName,
+  layoutType
 }: { 
   products: Product[], 
-  categoryName: string 
+  categoryName: string,
+  layoutType?: string
 }) {
+  const isEditorial = layoutType === 'editorial-luxury';
   return (
-    <div className="container mx-auto px-6 py-32">
+    <div className={`${isEditorial ? "max-w-[1400px] mx-auto px-6 py-32" : "container mx-auto px-6 py-32"}`}>
       {/* Category Header */}
       <motion.div 
         initial={{ opacity: 0, y: 20 }}

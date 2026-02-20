@@ -52,6 +52,46 @@ export const PRODUCTS: Product[] = [
     brand: "MAISON LUXE",
     description: "A clean foundation for a high-perfection radiant finish."
   },
+  {
+    id: 203,
+    name: "Diorshow Iconic Overcurl",
+    price: 40,
+    image: "https://images.unsplash.com/photo-1591360236630-4eb9b346394c?auto=format&fit=crop&q=80&w=800",
+    hoverImage: "https://images.unsplash.com/photo-1625093742435-6fa192b6fb10?auto=format&fit=crop&q=80&w=800",
+    category: "makeup",
+    brand: "MAISON LUXE",
+    description: "Spectacular volume and curl mascara."
+  },
+  {
+    id: 204,
+    name: "Backstage Rosy Glow",
+    price: 45,
+    image: "https://images.unsplash.com/photo-1596704017254-9b121068fb31?auto=format&fit=crop&q=80&w=800",
+    hoverImage: "https://images.unsplash.com/photo-1557202355-15494200670d?auto=format&fit=crop&q=80&w=800",
+    category: "makeup",
+    brand: "MAISON LUXE",
+    description: "The secret weapon for the look of naturally rosy cheeks."
+  },
+  {
+    id: 205,
+    name: "Mono Couleur Couture",
+    price: 38,
+    image: "https://images.unsplash.com/photo-1503236123135-0835612d743a?auto=format&fit=crop&q=80&w=800",
+    hoverImage: "https://images.unsplash.com/photo-1583241800548-34451ae3a67d?auto=format&fit=crop&q=80&w=800",
+    category: "makeup",
+    brand: "MAISON LUXE",
+    description: "High-color long-wear eyeshadow."
+  },
+  {
+    id: 206,
+    name: "Professional Powder Brush",
+    price: 75,
+    image: "https://images.unsplash.com/photo-1512496015851-a90fb38ba796?auto=format&fit=crop&q=80&w=800",
+    hoverImage: "https://images.unsplash.com/photo-1607602132700-068252504e9a?auto=format&fit=crop&q=80&w=800",
+    category: "makeup",
+    brand: "MAISON LUXE",
+    description: "A high-precision brush for a flawless finish."
+  },
   // Fragrance
   {
     id: 301,
