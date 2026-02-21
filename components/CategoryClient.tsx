@@ -50,15 +50,15 @@ export default function CategoryClient({
                   <img
                     src={product.image}
                     alt={product.name}
-                    className="w-full h-full object-cover transition-opacity duration-1000 group-hover:opacity-0"
+                    className={`w-full h-full object-cover ${!isEditorial ? 'group-hover:opacity-100' : 'transition-opacity duration-1000 group-hover:opacity-0'}`}
                   />
                   <img
                     src={product.hoverImage}
                     alt={product.name}
-                    className="absolute inset-0 w-full h-full object-cover opacity-0 transition-opacity duration-1000 group-hover:opacity-100 scale-110 group-hover:scale-100 transition-transform"
+                    className={`absolute inset-0 w-full h-full object-cover ${!isEditorial ? 'opacity-100' : 'opacity-0 transition-opacity duration-1000 group-hover:opacity-100 scale-110 group-hover:scale-100 transition-transform'}`}
                   />
                   {/* Subtle Gold Overlay on Hover */}
-                  <div className="absolute inset-0 bg-luxe-gold/5 opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
+                  <div className={`absolute inset-0 bg-luxe-gold/5 ${!isEditorial ? 'opacity-0' : 'opacity-0 group-hover:opacity-100 transition-opacity duration-700'}`}></div>
                 </div>
                 
                 <div className="flex flex-col items-center">

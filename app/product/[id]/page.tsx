@@ -40,13 +40,15 @@ export default async function ProductDetail({
     <main className="bg-white">
       <div className="container mx-auto px-6 py-40 min-h-screen">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-start">
-          {/* Product Image */}
-          <div className="bg-luxe-cream aspect-square relative overflow-hidden group">
+          {/* Product Image - Single Image Only */}
+          <div className="bg-luxe-cream aspect-square relative overflow-hidden">
             <Image
-              src={product.thumbnail || product.image}
-              alt={product.title || product.name}
+              src={product.image}
+              alt={product.name || product.title}
               fill
-              className="object-cover object-center group-hover:scale-105 transition-transform duration-1000"
+              sizes="(max-width: 768px) 100vw, 50vw"
+              className="object-cover object-center"
+              priority
             />
           </div>
 
@@ -54,7 +56,7 @@ export default async function ProductDetail({
           <div className="flex flex-col">
             <div className="mb-12">
               <span className="text-luxe-gold uppercase tracking-[0.4em] text-[10px] font-semibold mb-4 block">
-                {product.category}
+                {product.category?.toUpperCase()}
               </span>
               <h1 className="text-4xl md:text-6xl font-serif text-luxe-black mb-6 leading-tight italic">
                 {product.title || product.name}

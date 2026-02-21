@@ -15,8 +15,8 @@ export const PRODUCTS: Product[] = [
     id: 101,
     name: "L'Or de Vie Le Sérum",
     price: 450,
-    image: "https://images.unsplash.com/photo-1571781926291-c477ebfd024b?auto=format&fit=crop&q=80&w=800",
-    hoverImage: "https://images.unsplash.com/photo-1612817288484-6f916006741a?auto=format&fit=crop&q=80&w=800",
+    image: "https://plus.unsplash.com/premium_photo-1661630971367-15853002aee8?w=600&auto=format&fit=crop&q=60",
+    hoverImage: "https://plus.unsplash.com/premium_photo-1661630971367-15853002aee8?w=600&auto=format&fit=crop&q=60",
     category: "skincare",
     brand: "MAISON LUXE",
     description: "The masterpiece of Dior skincare, L'Or de Vie Le Sérum is the ultimate elixir for skin longevity."
@@ -25,8 +25,8 @@ export const PRODUCTS: Product[] = [
     id: 102,
     name: "Prestige La Crème",
     price: 380,
-    image: "https://images.unsplash.com/photo-1556228578-0d85b1a4d571?auto=format&fit=crop&q=80&w=800",
-    hoverImage: "https://images.unsplash.com/photo-1616150638538-ffb0679a3fc4?auto=format&fit=crop&q=80&w=800",
+    image: "https://plus.unsplash.com/premium_photo-1679046948896-5f9aa56900e9?w=600&auto=format&fit=crop&q=60",
+    hoverImage: "https://plus.unsplash.com/premium_photo-1679046948896-5f9aa56900e9?w=600&auto=format&fit=crop&q=60",
     category: "skincare",
     brand: "MAISON LUXE",
     description: "A luxury cream that delivers intensive repair and visible rejuvenation."
