@@ -10,16 +10,16 @@ const products = [
     name: "L'Or De Vie",
     category: "The Serum",
     price: "450",
-    image: "https://images.unsplash.com/photo-1571781926291-c477ebfd024b?auto=format&fit=crop&q=80&w=800",
-    hoverImage: "https://images.unsplash.com/photo-1612817288484-6f916006741a?auto=format&fit=crop&q=80&w=800"
+    image: "https://plus.unsplash.com/premium_photo-1661630971367-15853002aee8?w=600&auto=format&fit=crop&q=60",
+    hoverImage: "https://plus.unsplash.com/premium_photo-1661630971367-15853002aee8?w=600&auto=format&fit=crop&q=60"
   },
   {
     id: 2,
     name: "Rouge Velvet",
     category: "Lip Color",
     price: "65",
-    image: "https://images.unsplash.com/photo-1586773860418-d3b9a8ec81a2?auto=format&fit=crop&q=80&w=800",
-    hoverImage: "https://images.unsplash.com/photo-1591360236630-4eb9b346394c?auto=format&fit=crop&q=80&w=800"
+    image: "https://images.unsplash.com/photo-1555050455-f96634b5cba6?w=600&auto=format&fit=crop&q=60",
+    hoverImage: "https://images.unsplash.com/photo-1555050455-f96634b5cba6?w=600&auto=format&fit=crop&q=60"
   },
   {
     id: 3,
@@ -79,24 +79,27 @@ export default function FeaturedCollection() {
               className={`
                 ${index === 0 ? "md:col-span-7" : ""}
                 ${index === 1 ? "md:col-span-5 md:pt-32" : ""}
-                ${index === 2 ? "md:col-span-5" : ""}
-                ${index === 3 ? "md:col-span-7 md:-mt-32" : ""}
+                ${index === 2 ? "md:col-span-5 md:pt-24" : ""}
+                ${index === 3 ? "md:col-span-7 md:pt-32" : ""}
                 group
               `}
             >
-              <Link href={`/product/${product.id}`} className="block">
+              <Link 
+                href={
+                  index === 0 ? "/category/skincare" : 
+                  index === 1 ? "/category/makeup" : 
+                  index === 2 ? "/category/fragrance" : 
+                  "/category/skincare"
+                } 
+                className="block"
+              >
                 <div className="relative aspect-[4/5] overflow-hidden bg-luxury-gray mb-8">
                   <img
                     src={product.image}
                     alt={product.name}
-                    className="w-full h-full object-cover transition-opacity duration-700 ease-in-out group-hover:opacity-0"
+                    className="w-full h-full object-cover"
                   />
-                  <img
-                    src={product.hoverImage}
-                    alt={`${product.name} detail`}
-                    className="absolute inset-0 w-full h-full object-cover opacity-0 transition-opacity duration-700 ease-in-out group-hover:opacity-100 scale-105 group-hover:scale-100 transition-transform"
-                  />
-                  <div className="absolute bottom-0 left-0 w-full h-[1px] bg-gold scale-x-0 group-hover:scale-x-100 transition-transform duration-700 origin-left"></div>
+                  <div className="absolute bottom-0 left-0 w-full h-[1px] bg-gold"></div>
                 </div>
                 
                 <div className="flex justify-between items-start">

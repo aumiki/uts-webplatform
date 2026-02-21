@@ -31,21 +31,10 @@ export default function LuxuryHero() {
           <h1 className="text-5xl md:text-8xl font-serif text-white mb-8 leading-tight tracking-tight">
             RADIANCE <br /> <span className="italic font-light">Redefined.</span>
           </h1>
-          <p className="text-white/60 text-sm md:text-lg max-w-2xl mx-auto mb-12 font-sans font-light tracking-wide leading-relaxed">
+          <p className="text-white/60 text-sm md:text-lg max-w-2xl mx-auto font-sans font-light tracking-wide leading-relaxed">
             Experience the alchemy of science and luxury. A timeless collection 
             crafted for the most discerning individuals.
           </p>
-          <div className="flex flex-col md:flex-row gap-6 justify-center items-center">
-            <LuxeButton className="!border-white !text-white hover:!border-black">
-              Discover Collection
-            </LuxeButton>
-            <Link 
-              href="/" 
-              className="text-[10px] uppercase tracking-[0.3em] text-white/60 hover:text-white transition-colors py-4 px-8 border border-transparent"
-            >
-              The Film
-            </Link>
-          </div>
         </motion.div>
       </div>
 

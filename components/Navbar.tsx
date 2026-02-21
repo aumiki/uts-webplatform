@@ -22,20 +22,20 @@ export default function Navbar() {
 
   return (
     <motion.nav
-      initial={{ backgroundColor: "rgba(255, 255, 255, 0)", borderBottomColor: "rgba(26, 26, 26, 0)" }}
+      initial={{ backgroundColor: "rgba(255, 255, 255, 0)", borderBottomColor: "rgba(197, 160, 89, 0)" }}
       animate={{ 
-        backgroundColor: isScrolled ? "#FFFFFF" : "rgba(255, 255, 255, 0)",
-        borderBottomColor: isScrolled ? "rgba(26, 26, 26, 0.05)" : "rgba(26, 26, 26, 0)"
+        backgroundColor: isScrolled ? "rgba(255, 255, 255, 0.85)" : "rgba(255, 255, 255, 0)",
+        borderBottomColor: isScrolled ? "rgba(197, 160, 89, 0.1)" : "rgba(197, 160, 89, 0)"
       }}
       transition={{ duration: 0.5, ease: "easeInOut" }}
-      className="fixed w-full top-0 z-[100] px-10 py-6 border-b transition-colors"
+      className="fixed w-full top-0 z-[100] px-10 py-5 border-b backdrop-blur-md transition-colors"
     >
       <div className="max-w-[1800px] mx-auto grid grid-cols-3 items-center">
         
         {/* Left: Main Navigation */}
-        <div className="flex gap-10 text-[10px] uppercase tracking-ultra font-medium text-luxe-black">
+        <div className="flex gap-10 text-[11px] uppercase tracking-[0.2em] font-medium text-luxe-black">
           {["skincare", "makeup", "fragrance", "shades"].map((category) => (
-            <Link key={category} href={`/category/${category}`} className="relative group overflow-hidden">
+            <Link key={category} href={`/category/${category}`} className="relative group overflow-hidden py-1">
               <span className="group-hover:text-luxe-gold transition-colors duration-300 capitalize">
                 {category}
               </span>
@@ -46,23 +46,23 @@ export default function Navbar() {
 
         {/* Center: Logo */}
         <div className="text-center">
-          <Link href="/" className="text-3xl font-serif tracking-[0.5em] text-luxe-black font-bold">
+          <Link href="/" className="text-4xl font-serif tracking-[0.35em] text-luxe-black font-bold">
             MAISON<span className="font-light">LUXE</span>
           </Link>
         </div>
 
         {/* Right: Utility Icons */}
-        <div className="flex gap-8 justify-end items-center text-luxe-black">
-          <button className="group">
-            <Search size={18} strokeWidth={1.5} className="group-hover:text-luxe-gold transition-colors" />
+        <div className="flex gap-6 justify-end items-center text-luxe-black">
+          <button className="group p-2">
+            <Search size={20} strokeWidth={1.5} className="group-hover:text-luxe-gold transition-colors" />
           </button>
-          <button className="group">
-            <User size={18} strokeWidth={1.5} className="group-hover:text-luxe-gold transition-colors" />
+          <button className="group p-2">
+            <User size={20} strokeWidth={1.5} className="group-hover:text-luxe-gold transition-colors" />
           </button>
-          <Link href="/cart" className="relative group">
-            <ShoppingBag size={18} strokeWidth={1.5} className="group-hover:text-luxe-gold transition-colors" />
+          <Link href="/cart" className="relative group p-2">
+            <ShoppingBag size={20} strokeWidth={1.5} className="group-hover:text-luxe-gold transition-colors" />
             {totalItems > 0 && (
-              <span className="absolute -top-2 -right-2 text-[8px] bg-luxe-black text-white w-4 h-4 rounded-full flex items-center justify-center font-bold">
+              <span className="absolute -top-1 -right-1 text-[8px] bg-luxe-black text-white w-4 h-4 rounded-full flex items-center justify-center font-bold">
                 {totalItems}
               </span>
             )}

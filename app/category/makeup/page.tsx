@@ -71,7 +71,7 @@ const faceProducts: MakeupProduct[] = [
     description: "A silky-smooth powder blush that provides a healthy flush of color.",
     category: "Face",
     imageUrl: "https://images.unsplash.com/photo-1596704017254-9b121068fb31?auto=format&fit=crop&w=800&q=80",
-    hoverImageUrl: "https://images.unsplash.com/photo-1557202355-15494200670d?auto=format&fit=crop&w=800&q=80",
+    hoverImageUrl: "https://images.unsplash.com/photo-1596704017254-9b121068fb31?auto=format&fit=crop&w=800&q=80",
     skinType: "All Skin Types",
     rating: 4
   }
@@ -170,12 +170,11 @@ function StarRating({ rating }: { rating: number }) {
   );
 }
 
-// Product Card Component - With Large Card support for Featured products
+// Product Card Component - Without Quick View
 function ProductCard({ 
   product, 
   onHover, 
   onLeave,
-  onQuickView,
   onAddToBag,
   index,
   isLargeCard = false
@@ -183,7 +182,6 @@ function ProductCard({
   product: MakeupProduct;
   onHover: (id: number) => void;
   onLeave: () => void;
-  onQuickView: (id: number) => void;
   onAddToBag: (product: MakeupProduct) => void;
   index: number;
   isLargeCard?: boolean;
@@ -246,27 +244,6 @@ function ProductCard({
             </span>
           )}
         </div>
-
-        {/* Quick View Button */}
-        <AnimatePresence>
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: 10 }}
-            transition={{ duration: 0.3 }}
-            className="absolute inset-x-4 bottom-4"
-          >
-            <button
-              onClick={(e) => {
-                e.preventDefault();
-                onQuickView(product.id);
-              }}
-              className="w-full bg-white/90 py-3 text-[10px] uppercase tracking-[0.2em] text-[#22171b] backdrop-blur-sm transition hover:bg-white"
-            >
-              Quick View
-            </button>
-          </motion.div>
-        </AnimatePresence>
       </div>
 
       {/* Product Info */}
@@ -278,7 +255,6 @@ function ProductCard({
         <h2 className="mt-2 font-serif text-xl leading-tight text-[#20171a]">{product.name}</h2>
         <p className="mt-2 text-sm leading-relaxed text-[#62565a] line-clamp-2">{product.description}</p>
 
-        {/* Skin Type Information */}
         {product.skinType && (
           <p className="mt-2 text-xs tracking-wide text-[#8f7b7f]">
             Skin Type: <span className="text-[#62565a]">{product.skinType}</span>
@@ -306,7 +282,6 @@ function ProductCard({
 export default function MakeupCategoryPage() {
   const [hoveredId, setHoveredId] = useState<number | null>(null);
   const [activeCategory, setActiveCategory] = useState<string>("All");
-  const [showQuickView, setShowQuickView] = useState<number | null>(null);
   const { addToCart } = useCart();
 
   const filteredProducts = useMemo(() => {
@@ -338,7 +313,6 @@ export default function MakeupCategoryPage() {
           product={product}
           onHover={setHoveredId}
           onLeave={() => setHoveredId(null)}
-          onQuickView={setShowQuickView}
           onAddToBag={handleAddToBag}
           index={index}
           isLargeCard={isLargeCard}
@@ -554,79 +528,6 @@ export default function MakeupCategoryPage() {
       </div>
 
       <LuxuryFooter />
-
-      {/* Quick View Modal */}
-      <AnimatePresence>
-        {showQuickView && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4"
-            onClick={() => setShowQuickView(null)}
-          >
-            <motion.div
-              initial={{ scale: 0.9, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              exit={{ scale: 0.9, opacity: 0 }}
-              onClick={(e) => e.stopPropagation()}
-              className="relative w-full max-w-3xl overflow-hidden bg-white"
-            >
-              <button
-                onClick={() => setShowQuickView(null)}
-                className="absolute right-4 top-4 z-10 p-2 text-[#22171b] hover:text-[#C5A059]"
-              >
-                <svg className="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                </svg>
-              </button>
-              <div className="grid grid-cols-1 md:grid-cols-2">
-                <div className="relative aspect-[3/4] bg-[#f1ebe5]">
-                  <Image
-                    src={makeupProducts.find(p => p.id === showQuickView)?.imageUrl || ""}
-                    alt={makeupProducts.find(p => p.id === showQuickView)?.name || "Quick View Product"}
-                    fill
-                    className="object-cover"
-                  />
-                </div>
-                <div className="flex flex-col justify-center p-8">
-                  <p className="text-[11px] uppercase tracking-[0.18em] text-[#8f7b7f]">
-                    {makeupProducts.find(p => p.id === showQuickView)?.category}
-                  </p>
-                  <h3 className="mt-2 font-serif text-2xl text-[#22171b]">
-                    {makeupProducts.find(p => p.id === showQuickView)?.name}
-                  </h3>
-                  <p className="mt-4 text-lg text-[#C5A059]">
-                    {priceFormatter.format(makeupProducts.find(p => p.id === showQuickView)?.price || 0)}
-                  </p>
-                  <p className="mt-4 text-sm leading-relaxed text-[#62565a]">
-                    {makeupProducts.find(p => p.id === showQuickView)?.description}
-                  </p>
-                  <div className="mt-8 flex gap-4">
-                    <button
-                      onClick={() => {
-                        const product = makeupProducts.find(p => p.id === showQuickView);
-                        if (product) handleAddToBag(product);
-                        setShowQuickView(null);
-                      }}
-                      className="flex-1 bg-[#22171b] py-3 text-[10px] uppercase tracking-[0.2em] text-white transition hover:bg-[#C5A059]"
-                    >
-                      Add to Bag
-                    </button>
-                    <Link
-                      href={`/product/${showQuickView}`}
-                      onClick={() => setShowQuickView(null)}
-                      className="flex-1 border border-[#22171b] py-3 text-center text-[10px] uppercase tracking-[0.2em] text-[#22171b] transition hover:bg-[#22171b] hover:text-white"
-                    >
-                      View Details
-                    </Link>
-                  </div>
-                </div>
-              </div>
-            </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
     </motion.main>
   );
 }
