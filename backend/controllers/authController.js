@@ -1,21 +1,25 @@
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const User = require("../models/User");
-require("dotenv").config();
+const path = require("path");
+require("dotenv").config({ path: path.join(__dirname, "..", ".env") });
+
+const JWT_SECRET = process.env.JWT_SECRET || "fallback_secret_key";
+const JWT_REFRESH_SECRET = process.env.JWT_REFRESH_SECRET || "fallback_refresh_secret";
 
 const generateAccessToken = (user) => {
   return jwt.sign(
     { id: user.id, email: user.email },
-    process.env.JWT_SECRET,
-    { expiresIn: process.env.JWT_EXPIRES_IN }
+    JWT_SECRET,
+    { expiresIn: process.env.JWT_EXPIRES_IN || "1h" }
   );
 };
 
 const generateRefreshToken = (user) => {
   return jwt.sign(
     { id: user.id, email: user.email },
-    process.env.JWT_REFRESH_SECRET,
-    { expiresIn: process.env.JWT_REFRESH_EXPIRES_IN }
+    JWT_REFRESH_SECRET,
+    { expiresIn: process.env.JWT_REFRESH_EXPIRES_IN || "7d" }
   );
 };
 
@@ -81,7 +85,7 @@ const refresh = async (req, res) => {
       return res.status(401).json({ message: "Refresh token required" });
     }
 
-    const decoded = jwt.verify(refreshToken, process.env.JWT_REFRESH_SECRET);
+    const decoded = jwt.verify(refreshToken, JWT_REFRESH_SECRET);
     const user = await User.findOne({ where: { id: decoded.id, refreshToken } });
 
     if (!user) {
