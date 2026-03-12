@@ -1,0 +1,330 @@
+/* Luxury Cosmetics Product Management Styles */
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600&family=Jost:wght@300;400;500&display=swap');
+
+
+
+.productsPage {
+  min-height: 100vh;
+  background: #0e0d0b;
+  color: #f5efe6;
+  font-family: 'Jost', sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.6;
+  padding: 8rem 2rem 2rem;
+}
+
+.container {
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.pageTitle {
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 400;
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  color: #f5efe6;
+  letter-spacing: 0.05em;
+  margin-bottom: 0.5rem;
+}
+
+.pageSubtitle {
+  font-size: 1.1rem;
+  color: #c9a96e;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  font-weight: 300;
+}
+
+.addBtn {
+  background: #c9a96e;
+  color: #0e0d0b;
+  border: none;
+  padding: 1rem 2rem;
+  font-family: 'Jost', sans-serif;
+  font-size: 1rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  cursor: pointer;
+  border-radius: 0;
+  transition: all 0.3s ease;
+  display: inline-block;
+  margin-bottom: 2rem;
+}
+
+.addBtn:hover {
+  background: #f5efe6;
+  transform: translateY(-2px);
+  box-shadow: 0 10px 30px rgba(201, 169, 110, 0.4);
+}
+
+.loading {
+  text-align: center;
+  padding: 4rem;
+  font-size: 1.2rem;
+  color: #c9a96e;
+}
+
+.spinner {
+  width: 40px;
+  height: 40px;
+  border: 3px solid rgba(201, 169, 110, 0.3);
+  border-top: 3px solid #c9a96e;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin: 0 auto 1rem;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.error {
+  background: rgba(201, 169, 110, 0.1);
+  border: 1px solid #c9a96e;
+  color: #f5efe6;
+  padding: 1rem 1.5rem;
+  border-radius: 0;
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.productsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  gap: 1.5rem;
+}
+
+.productCard {
+  background: rgba(15, 14, 11, 0.8);
+  border: 1px solid rgba(201, 169, 110, 0.2);
+  padding: 1.5rem;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(10px);
+}
+
+.productCard:hover {
+  transform: translateY(-5px);
+  border-color: #c9a96e;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+}
+
+.productName {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.3rem;
+  color: #f5efe6;
+  margin-bottom: 0.5rem;
+}
+
+.productDetail {
+  display: flex;
+  justify-content: space-between;
+  margin: 0.5rem 0;
+  font-size: 0.95rem;
+  color: #c9a96e;
+}
+
+.price {
+  font-weight: 500;
+  font-size: 1.1rem;
+  color: #c9a96e;
+}
+
+.actions {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+.actionBtn {
+  padding: 0.5rem 1rem;
+  border: none;
+  font-size: 0.85rem;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  cursor: pointer;
+  border-radius: 0;
+  transition: all 0.2s ease;
+  flex: 1;
+}
+
+.editBtn {
+  background: rgba(201, 169, 110, 0.2);
+  color: #c9a96e;
+  border: 1px solid rgba(201, 169, 110, 0.3);
+}
+
+.editBtn:hover {
+  background: #c9a96e;
+  color: #0e0d0b;
+}
+
+.deleteBtn {
+  background: rgba(120, 117, 115, 0.3);
+  color: #f5efe6;
+  border: 1px solid rgba(120, 117, 115, 0.5);
+}
+
+.deleteBtn:hover {
+  background: #8b0000;
+  border-color: #b22222;
+}
+
+.modalOverlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(14, 13, 11, 0.95);
+  backdrop-filter: blur(5px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 1rem;
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.modal {
+  background: #0e0d0b;
+  border: 1px solid #c9a96e;
+  max-width: 500px;
+  width: 100%;
+  max-height: 90vh;
+  overflow-y: auto;
+  border-radius: 0;
+}
+
+.modalHeader {
+  padding: 2rem 2rem 1rem;
+  border-bottom: 1px solid rgba(201, 169, 110, 0.3);
+}
+
+.modalTitle {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.8rem;
+  color: #f5efe6;
+  margin-bottom: 0.5rem;
+}
+
+.modalBody {
+  padding: 2rem;
+}
+
+.formGroup {
+  margin-bottom: 1.5rem;
+}
+
+.formLabel {
+  display: block;
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: #c9a96e;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-bottom: 0.5rem;
+}
+
+.formInput,
+.formTextarea,
+.formSelect {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  background: rgba(15, 14, 11, 0.8);
+  border: 1px solid rgba(201, 169, 110, 0.3);
+  color: #f5efe6;
+  font-family: 'Jost', sans-serif;
+  font-size: 1rem;
+  transition: border-color 0.3s ease;
+}
+
+.formInput:focus,
+.formTextarea:focus,
+.formSelect:focus {
+  outline: none;
+  border-color: #c9a96e;
+}
+
+.formTextarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+.formRow {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.modalActions {
+  display: flex;
+  gap: 1rem;
+  padding: 1.5rem 2rem 2rem;
+  border-top: 1px solid rgba(201, 169, 110, 0.3);
+}
+
+.modalBtn {
+  flex: 1;
+  padding: 1rem;
+  border: none;
+  font-family: 'Jost', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border-radius: 0;
+}
+
+.submitBtn {
+  background: #c9a96e;
+  color: #0e0d0b;
+}
+
+.submitBtn:hover {
+  background: #f5efe6;
+  transform: translateY(-1px);
+}
+
+.cancelBtn {
+  background: transparent;
+  color: #f5efe6;
+  border: 1px solid rgba(245, 239, 230, 0.3);
+}
+
+.cancelBtn:hover {
+  background: rgba(245, 239, 230, 0.1);
+  border-color: #f5efe6;
+}
+
+@media (max-width: 768px) {
+  .productsPage { padding: 6rem 1rem 1rem; }
+  .productsGrid { grid-template-columns: 1fr; }
+  .formRow { grid-template-columns: 1fr; }
+  .modalActions { flex-direction: column; }
+}
+
+.emptyState {
+  text-align: center;
+  padding: 4rem 2rem;
+  color: #c9a96e;
+}
+
+.emptyTitle {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
