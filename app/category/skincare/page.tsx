@@ -4,7 +4,7 @@ import { useMemo, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
-import Navbar from "@/components/Navbar";
+import NavbarClient from "@/components/NavbarClient";
 import LuxuryFooter from "@/components/LuxuryFooter";
 import { useCart } from "@/context/CartContext";
 import { PRODUCTS } from "@/constants/products";
@@ -261,7 +261,7 @@ export default function SkincareCategoryPage() {
       transition={{ duration: 0.8, ease: "easeOut" }}
       className="min-h-screen bg-[#FAF9F6] text-[#181318]"
     >
-      <Navbar />
+<NavbarClient />
 
       <div className="mx-auto max-w-[1440px] px-6 pb-24 pt-28 md:px-10 lg:px-14">
         

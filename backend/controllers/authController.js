@@ -99,6 +99,24 @@ const refresh = async (req, res) => {
   }
 };
 
+// GET PROFILE
+const getProfile = async (req, res) => {
+  try {
+    const userId = req.user.id;
+    const user = await User.findByPk(userId, {
+      attributes: ['id', 'fullName', 'email'],
+    });
+    
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+    
+    res.status(200).json({ user });
+  } catch (err) {
+    res.status(500).json({ message: "Server error", error: err.message });
+  }
+};
+
 // LOGOUT
 const logout = async (req, res) => {
   try {
@@ -115,4 +133,4 @@ const logout = async (req, res) => {
   }
 };
 
-module.exports = { register, login, refresh, logout };
+module.exports = { register, login, refresh, logout, getProfile };

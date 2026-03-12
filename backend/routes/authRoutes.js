@@ -6,5 +6,6 @@ router.post("/register", register);
 router.post("/login", login);
 router.post("/refresh", refresh);
 router.post("/logout", logout);
+router.get("/profile", require("../middleware/authMiddleware"), require("../controllers/authController").getProfile);
 
 module.exports = router;

@@ -1,8 +1,8 @@
 import "./globals.css";
 import { CartProvider } from "../context/CartContext";
-import CartIndicator from "../components/CartIndicator";
 import { FavoriteProvider } from "../context/FavoriteContext";
-import Navbar from "../components/Navbar";
+import { AuthProvider } from "../context/AuthContext";
+import AuthHideWrapper from "../components/AuthHideWrapper";
 
 export default function RootLayout({
   children,
@@ -12,18 +12,17 @@ export default function RootLayout({
   return (
     <html lang="en" className="h-full" suppressHydrationWarning>
       <body className="flex flex-col min-h-screen">
-        <CartProvider>
-          <FavoriteProvider>
-            <Navbar />
+        <AuthProvider>
+          <CartProvider>
+            <FavoriteProvider>
+              <AuthHideWrapper />
 
-            <main className="flex-grow">
-              {children}
-            </main>
-
-            <CartIndicator />
-
-          </FavoriteProvider>
-        </CartProvider>
+              <main className="flex-grow">
+                {children}
+              </main>
+            </FavoriteProvider>
+          </CartProvider>
+        </AuthProvider>
       </body>
     </html>
   );
