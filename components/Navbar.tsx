@@ -1,20 +1,25 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import { motion, useScroll, useTransform } from "framer-motion";
-import { Search, User, ShoppingBag, ChevronDown, Package } from "lucide-react";
-import AdminLink from "./AdminLink";
+import { User, ShoppingBag, ChevronDown, Package, LogOut } from "lucide-react";
+
 import { useCart } from "../context/CartContext";
 import { useAuth } from "../context/AuthContext";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
+
 
 export default function Navbar() {
   const { cart } = useCart();
-  const { user, loading: authLoading } = useAuth();
+  const { user, loading: authLoading, logout } = useAuth();
   const [isScrolled, setIsScrolled] = useState(false);
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const dropdownRef = useRef<HTMLDivElement>(null);
   const pathname = usePathname();
+  const router = useRouter();
   const isAdminPage = pathname === '/products';
+
 
   const { scrollY } = useScroll();
 
@@ -24,6 +29,18 @@ export default function Navbar() {
       setIsScrolled(latest > 50);
     });
   }, [scrollY]);
+
+  // Close dropdown on outside click
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+        setIsDropdownOpen(false);
+      }
+    };
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
+
 
   const totalItems = cart.reduce((acc, item) => acc + item.quantity, 0);
 
@@ -70,30 +87,78 @@ export default function Navbar() {
 
         {/* Right: Utility Icons */}
         <div className="flex gap-4 justify-end items-center">
-          <button className="group p-2">
-            <Search size={20} strokeWidth={1.5} className="group-hover:text-luxe-gold transition-colors" />
-          </button>
+
           
-          <AdminLink />
+
           
-          <div className="relative group">
-            {!authLoading && !user ? (
-              <Link 
-                href="/login" 
-                className="flex items-center gap-1 p-2 rounded-lg hover:bg-luxe-gold/10 transition-colors"
-              >
-                <User size={20} strokeWidth={1.5} className="group-hover:text-luxe-gold transition-colors" />
-              </Link>
-            ) : (
-              <>
-                <button 
-                  className="flex items-center gap-1 p-2 rounded-lg hover:bg-luxe-gold/10 transition-colors relative"
-                >
-                  <User size={20} strokeWidth={1.5} className="group-hover:text-luxe-gold transition-colors" />
-                </button>
-              </>
+          <div className="relative" ref={dropdownRef}>
+            <button 
+              onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+              className="flex items-center gap-1 p-2 rounded-lg hover:bg-luxe-gold/10 transition-colors relative group"
+              disabled={authLoading}
+            >
+              <User size={20} strokeWidth={1.5} className="group-hover:text-luxe-gold transition-colors" />
+              {user && <span className="text-xs font-medium">{user.fullName.split(' ')[0]}</span>}
+            </button>
+            {isDropdownOpen && (
+              <div className={`absolute top-full right-0 mt-2 w-56 py-3 px-4 z-[101] rounded-xl shadow-2xl backdrop-blur-md border transition-all duration-200 ${
+                isAdminPage 
+                  ? 'bg-[#0e0d0b]/95 border-[#c9a96e]/30 text-[#f5efe6]' 
+                  : 'bg-white/95 border-gray-200/50 text-gray-900'
+              }`}>
+                {!authLoading ? (
+                  user ? (
+                    <>
+                      <div className="font-serif text-sm font-semibold mb-3 pb-2 border-b border-luxe-gold/30">
+                        {user.fullName}
+                      </div>
+                      <Link 
+                        href="/products" 
+                        className="flex items-center gap-2 w-full text-left p-2 rounded-lg hover:bg-luxe-gold/20 transition-colors block mb-1"
+                        onClick={() => setIsDropdownOpen(false)}
+                      >
+                        <Package size={16} />
+                        Manage Products
+                      </Link>
+                      <button
+                        onClick={async () => {
+                          await logout();
+                          setIsDropdownOpen(false);
+                          router.push('/login');
+                        }}
+                        className="flex items-center gap-2 w-full text-left p-2 rounded-lg hover:bg-rose-500/10 transition-colors text-rose-600 hover:text-rose-500"
+                      >
+                        <LogOut size={16} />
+                        Logout
+                      </button>
+                    </>
+                  ) : (
+                    <>
+                      <Link 
+                        href="/login" 
+                        className="flex items-center gap-2 w-full text-left p-2 rounded-lg hover:bg-luxe-gold/10 transition-colors block mb-2"
+                        onClick={() => setIsDropdownOpen(false)}
+                      >
+                        <User size={16} />
+                        Sign In
+                      </Link>
+                      <Link 
+                        href="/register"
+                        className="flex items-center gap-2 w-full text-left p-2 rounded-lg hover:bg-luxe-gold/10 transition-colors block"
+                        onClick={() => setIsDropdownOpen(false)}
+                      >
+                        <User size={16} />
+                        Create Account
+                      </Link>
+                    </>
+                  )
+                ) : (
+                  <div className="py-4 text-xs text-gray-500 text-center">Loading...</div>
+                )}
+              </div>
             )}
           </div>
+
           
           <Link href="/cart" className="relative group p-2">
             <ShoppingBag size={20} strokeWidth={1.5} className="group-hover:text-luxe-gold transition-colors" />

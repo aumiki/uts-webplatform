@@ -150,12 +150,16 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       console.error('Logout error:', err);
     }
     if (typeof window !== 'undefined') {
-      localStorage.removeItem('accessToken');
-      localStorage.removeItem('refreshToken');
+    localStorage.removeItem('accessToken');
+    localStorage.removeItem('refreshToken');
+    if (typeof window !== 'undefined') {
+      document.cookie = "accessToken=; path=/; max-age=0";
     }
-    setUser(null);
-    setRefreshTokenVal(null);
-  };
+  }
+  setUser(null);
+  setRefreshTokenVal(null);
+};
+
 
   // Init: check persisted login
   useEffect(() => {

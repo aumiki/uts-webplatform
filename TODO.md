@@ -1,15 +1,10 @@
-# Route Protection Implementation TODO
+# Navbar Cleanup Task - Remove Search Icon and Box(?)
 
-## Status: In Progress
+**Status: In Progress**
 
-✅ **Step 1**: Create `middleware.ts` at root with route protection for /products, /profile and auth redirects  
-✅ **Step 2**: Update `app/login/page.tsx` to set accessToken cookie after localStorage
-✅ **Step 3**: Update `app/register/page.tsx` redirect to /login on success  
-✅ **Step 4**: Create `lib/auth.ts` with getToken(), isLoggedIn(), logout() utilities
-✅ **Step 5**: Test flows (login → /products, /profile access; logout → /login; unauth access)
-✅ **Step 3**: Update `app/register/page.tsx` redirect to /login on success  
-✅ **Step 4**: Create `lib/auth.ts` with getToken(), isLoggedIn(), logout() utilities
-✅ **Step 5**: Test flows (login → /products, /profile access; logout → /login; unauth access)
+## Steps:
+- [x] Step 1: Create TODO.md with plan breakdown ✅
+- [x] Step 2: Edit components/Navbar.tsx to remove Search button and AdminLink ✅
+- [x] Step 3: Verify changes across pages (no search/admin icons, profile/cart intact) ✅
+- [x] Step 4: Update TODO.md with completion and attempt_completion ✅
 
-## Next Action
-Start with Step 1: Create middleware.ts
