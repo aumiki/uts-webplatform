@@ -1,23 +1,26 @@
 "use client";
 
 import { useState, useRef, useEffect } from 'react';
-import { ChevronDown, LogOut, User as UserIcon, Mail } from 'lucide-react';
+import { ChevronDown, LogOut, User as UserIcon, Mail, UserCog } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { useAuth } from '../context/AuthContext';
+import { useAuth } from '@/context/AuthContext';
+import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 
 interface UserProfileDropdownProps {
   isOpen: boolean;
   onClose: () => void;
-  userFullName: string;
 }
 
 export default function UserProfileDropdown({ 
   isOpen, 
-  onClose, 
-  userFullName 
+  onClose 
 }: UserProfileDropdownProps) {
   const dropdownRef = useRef<HTMLDivElement>(null);
-  const { logout } = useAuth();
+  const router = useRouter();
+  const { user, logout } = useAuth();
+  const displayName = user ? user.fullName.split(' ')[0] : 'User';
+  const email = user ? user.email : 'email@example.com';
 
   // Close on outside click
   useEffect(() => {
@@ -51,7 +54,7 @@ export default function UserProfileDropdown({
             </div>
             <div>
               <p className="font-serif text-lg font-semibold text-luxe-black leading-tight">
-                Hi, {userFullName.split(' ')[0]}
+                Hi, {displayName}
               </p>
               <p className="text-xs text-gray-500 font-medium uppercase tracking-wide">
                 Account
@@ -59,13 +62,26 @@ export default function UserProfileDropdown({
             </div>
           </div>
 
-          {/* Profile Info */}
+          {/* Profile Link & Info */}
           <div className="space-y-3 py-3">
+            <button
+              onClick={() => {
+                router.push('/profile');
+                onClose();
+              }}
+              className="w-full flex items-center gap-3 p-3 -m-1 rounded-xl hover:bg-luxe-gold/10 transition-colors group text-left"
+            >
+              <UserCog size={16} className="text-gray-400 group-hover:text-luxe-gold flex-shrink-0" />
+              <div className="flex-1 min-w-0">
+                <p className="text-xs text-gray-400 group-hover:text-gray-700 font-medium uppercase tracking-wide">Profile</p>
+                <p className="font-medium text-sm text-luxe-black truncate">View Profile</p>
+              </div>
+            </button>
             <div className="flex items-center gap-3 p-3 -m-1 rounded-xl hover:bg-gray-50 transition-colors group cursor-default">
               <Mail size={16} className="text-gray-400 group-hover:text-luxe-gold flex-shrink-0" />
               <div>
                 <p className="text-xs text-gray-400 group-hover:text-gray-700">Email</p>
-                <p className="font-medium text-sm text-luxe-black truncate">{userFullName}</p>
+                <p className="font-medium text-sm text-luxe-black truncate">{email}</p>
               </div>
             </div>
           </div>

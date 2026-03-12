@@ -12,9 +12,9 @@ export default function CartIndicator() {
 
   return (
     <div className="fixed bottom-8 right-8 z-40">
-      <Link 
+<Link 
         href="/cart" 
-        className="bg-foreground text-cream w-16 h-16 rounded-full flex items-center justify-center shadow-2xl shadow-soft-pink/20 hover:bg-soft-pink transition-all duration-300 group"
+        className="bg-luxe-black text-white w-16 h-16 rounded-full flex items-center justify-center shadow-2xl shadow-luxe-gold/30 hover:bg-luxe-gold hover:shadow-luxe-gold/50 transition-all duration-300 group relative z-50"
       >
         <div className="relative">
           <svg

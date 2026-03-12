@@ -6,13 +6,13 @@ import { motion, useScroll, useTransform } from "framer-motion";
 import { Search, User, ShoppingBag, ChevronDown } from "lucide-react";
 import { useCart } from "../context/CartContext";
 import { useAuth } from "../context/AuthContext";
-import UserProfileDropdown from "./UserProfileDropdown";
+
 
 export default function Navbar() {
   const { cart } = useCart();
   const { user, loading: authLoading } = useAuth();
   const [isScrolled, setIsScrolled] = useState(false);
-  const [showDropdown, setShowDropdown] = useState(false);
+
   const { scrollY } = useScroll();
 
   // Handle background transition on scroll
@@ -72,20 +72,11 @@ export default function Navbar() {
             ) : (
               <>
                 <button 
-                  onClick={() => setShowDropdown(!showDropdown)}
+
                   className="flex items-center gap-1 p-2 rounded-lg hover:bg-luxe-gold/10 transition-colors relative"
                 >
-                  <div className="w-7 h-7 bg-gradient-to-br from-luxe-gold/30 to-amber-300 rounded-full flex items-center justify-center text-xs font-bold text-white uppercase flex-shrink-0">
-                    {user?.fullName.split(' ').slice(0,2).map(n => n[0]).join('')}
-                  </div>
-                  <User size={18} strokeWidth={1.8} className="group-hover:text-luxe-gold transition-colors" />
-                  <ChevronDown size={14} className={`transition-transform ${showDropdown ? 'rotate-180' : ''}`} />
+                  <User size={20} strokeWidth={1.5} className="group-hover:text-luxe-gold transition-colors" />
                 </button>
-                <UserProfileDropdown 
-                  isOpen={showDropdown} 
-                  onClose={() => setShowDropdown(false)}
-                  userFullName={user?.fullName || ''}
-                />
               </>
             )}
           </div>
