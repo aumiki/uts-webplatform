@@ -1,9 +1,15 @@
-# Product Management Page Task Progress
+# Route Protection Implementation TODO
 
-## Plan Steps (Approved)
-- [x] **Step 1:** Create app/products/page.tsx with full CRUD functionality, luxury theme, modals, API integration to localhost:5000, auth handling, loading/error states.
-- [ ] **Step 2:** Test functionality (user to verify: backend running on 5000, login, visit /products, test add/edit/delete).
-- [ ] **Step 3:** Complete - run `npm run dev` and open http://localhost:3000/products.
+## Status: In Progress
 
-**Status:** File created successfully. Test the page and mark steps complete!
+✅ **Step 1**: Create `middleware.ts` at root with route protection for /products, /profile and auth redirects  
+✅ **Step 2**: Update `app/login/page.tsx` to set accessToken cookie after localStorage
+✅ **Step 3**: Update `app/register/page.tsx` redirect to /login on success  
+✅ **Step 4**: Create `lib/auth.ts` with getToken(), isLoggedIn(), logout() utilities
+✅ **Step 5**: Test flows (login → /products, /profile access; logout → /login; unauth access)
+✅ **Step 3**: Update `app/register/page.tsx` redirect to /login on success  
+✅ **Step 4**: Create `lib/auth.ts` with getToken(), isLoggedIn(), logout() utilities
+✅ **Step 5**: Test flows (login → /products, /profile access; logout → /login; unauth access)
 
+## Next Action
+Start with Step 1: Create middleware.ts

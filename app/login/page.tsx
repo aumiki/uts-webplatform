@@ -37,6 +37,7 @@ export default function LoginPage() {
 
       localStorage.setItem("accessToken", data.accessToken);
       localStorage.setItem("refreshToken", data.refreshToken);
+      document.cookie = `accessToken=${data.accessToken}; path=/; max-age=3600`;
 
       router.push("/");
     } catch (err) {
